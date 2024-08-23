@@ -34,8 +34,7 @@ def remove_product(inventory, product_id):
             del inventory[i]
             print(f"Removed product with id: {product_id}")
             return
-        else:
-            print(f"No product with id: {product_id} found in the inventory.")
+    print(f"No product with id: {product_id} found in the inventory.")
 
 
 def main():
