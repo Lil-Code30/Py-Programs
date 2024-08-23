@@ -36,6 +36,17 @@ def remove_product(inventory, product_id):
             return
     print(f"No product with id: {product_id} found in the inventory.")
 
+def update_product(inventory, product_id, new_quantity=None, new_price=None):
+    """Updating a product in the inventory"""
+    for product in inventory:
+        if product['id'] == product_id:
+            if new_quantity is not None:
+                product['quantity'] = new_quantity
+            if new_price is not None:
+                product['price'] = new_price
+            print(f"Updated product with ID: {product_id}")
+            return
+    print(f"No product with id: {product_id} found in the inventory.")
 
 def main():
     filename = "product-inventory.csv"
@@ -46,6 +57,7 @@ def main():
         print("\nInventory Management System")
         print("1. Add Product")
         print("2. Remove Product")
+        print("3. Update Product")
         print("6. Save and Exit")
         choice = input("Enter your choice: ")
 
@@ -59,6 +71,12 @@ def main():
         elif choice == '2':
             product_id = input("Enter product ID to remove: ")
             remove_product(inventory, product_id)
+        elif choice == '3':
+            product_id = input("Enter product ID to update: ")
+            new_quantity = input("Enter new quantity (Leave blank to skip): ")
+            new_price = input("Enter new price (Leave blank to skip): ")
+            update_product(inventory, product_id, new_quantity=int(new_quantity) if new_quantity else None, new_price=float(new_price) if new_price else None)
+
         elif choice == '6':
             save_inventory(filename, inventory)
             print("Inventory Saved. Exiting...")
