@@ -48,6 +48,28 @@ def update_product(inventory, product_id, new_quantity=None, new_price=None):
             return
     print(f"No product with id: {product_id} found in the inventory.")
 
+def view_inventory(inventory):
+    """Viewing the inventory"""
+    if not inventory:
+        print("Inventory is empty.")
+    else:
+        print(f"{'ID':<5} {'Name':<15} {'Quantity':<10} {'Price':<10}")
+        print('-' * 40)
+        for product in inventory:
+            print(f"{product['id']:<5} {product['name']:<15} {product['quantity']:<10} {product['price']:<10}")
+
+def search_product(inventory, name):
+    """Searching for a product in the inventory"""
+    for product in inventory:
+        if product['name'].lower() == name.lower():
+            print(f"ID: {product['id']}")
+            print(f"Name: {product['name']}")
+            print(f"Quantity: {product['quantity']}")
+            print(f"Price: {product['price']:.2f}$CAD")
+            print("-" * 30)
+            return
+    print(f"No product found with the name: {name}")
+
 def main():
     filename = "product-inventory.csv"
     #loading the inventory file (csv) into dictionaries in a list
@@ -58,6 +80,8 @@ def main():
         print("1. Add Product")
         print("2. Remove Product")
         print("3. Update Product")
+        print("4. View Inventory")
+        print("5. Search Product")
         print("6. Save and Exit")
         choice = input("Enter your choice: ")
 
@@ -76,7 +100,11 @@ def main():
             new_quantity = input("Enter new quantity (Leave blank to skip): ")
             new_price = input("Enter new price (Leave blank to skip): ")
             update_product(inventory, product_id, new_quantity=int(new_quantity) if new_quantity else None, new_price=float(new_price) if new_price else None)
-
+        elif choice == '4':
+            view_inventory(inventory)
+        elif choice == '5':
+            name = input("Enter product name to search: ")
+            search_product(inventory, name)
         elif choice == '6':
             save_inventory(filename, inventory)
             print("Inventory Saved. Exiting...")
