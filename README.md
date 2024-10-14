@@ -1,4 +1,4 @@
-Python Programs Collection
+# Python Programs Collection
 This repository is a collection of various Python programs that I'm developing and updating regularly. 
 The goal is to build a set of useful tools and scripts that can help with everyday tasks like unit conversion, 
 basic calculations, password management, and more
